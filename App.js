@@ -4,6 +4,7 @@ import './App.css';
 import AddMacro from "./AddMacro";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import { Header } from '@rneui/themed';
+import MacroDescription from "./MacroDescription";
 
 
 export default function App() {
@@ -13,10 +14,13 @@ export default function App() {
       <Router>
             <Routes>
               <Route
-              exact path={"/"}
-              element = {<AddMacro/>}
+                exact path={"/"}
+                element={<AddMacro/>}
               />
-
+            <Route
+                exact path="/description/:id"
+                element={<MacroDescription/>}
+            />
             </Routes>
       </Router>
       </div>

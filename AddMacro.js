@@ -6,6 +6,8 @@ import {Button, useTheme, Input} from "native-base";
 import { NativeBaseProvider, extendTheme} from 'native-base';
 import {Divider} from "@rneui/base";
 import {useParams} from "react-router-dom";
+import {set} from "@expo/cli/build/src/utils/obj";
+import './Search.css';
 
 
 export default function AddMacro(){
@@ -74,9 +76,26 @@ export default function AddMacro(){
     // state for search input
     const [search, setSearch] = useState('');
 
-    //
+    // search input box change function
     const onSearchChange = (event) => {
         setSearch(event.target.value);
+    }
+
+    // search submit state
+    const [submit, setSubmit] = useState('');
+
+    // function to save search
+    const onSearchSubmit = () => {
+        // if search = macro.title -- return macro.title
+        Macro.map((e) => {
+            if (search === e.title.toLowerCase()){
+                setSubmit(e.description)
+            }
+        })
+
+        return <div>
+            {submit}
+        </div>
     }
 
     return (
@@ -84,16 +103,22 @@ export default function AddMacro(){
         <div>
             <h1>Macro Dictionary</h1>
 
-            <div>
-                <div>
+            <div className={"App"}>
+                <div className={"search-container"}>
+                    <div className={"search-inner"}>
                     <input
                         type={"text"}
                         value={search}
                         onChange={onSearchChange}
                     />
-                    <button>Search</button>
-                </div>
-                <div>
+                    <button
+                        onClick={onSearchSubmit}>
+                        Search
+                    </button>
+                    </div>
+
+                <div className={"dropdown"}>
+                    <div className={"dropdown-row"}>
                     {Macro
                         .filter((macroItem) => {
                         const searchValue = search.toLowerCase();
@@ -105,16 +130,19 @@ export default function AddMacro(){
                     })
                         .map((e) => (
                             <div>
-                                {e.title}
+                                <a href={`/description/${e.id}`}>{e.title}</a>
                             </div>
                         ))
                     }
+                    </div>
                 </div>
+            </div>
             </div>
 
 
             <form
             onSubmit={(e) => {onSubmit(e)}}>
+
             <input
                 type={"text"}
                 placeholder={"Enter Title"}
