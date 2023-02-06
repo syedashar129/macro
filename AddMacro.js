@@ -98,6 +98,7 @@ export default function AddMacro(){
         </div>
     }
 
+
     return (
         <NativeBaseProvider theme={theme}>
         <div>
@@ -139,6 +140,7 @@ export default function AddMacro(){
             </div>
             </div>
 
+            <br/>
 
             <form
             onSubmit={(e) => {onSubmit(e)}}>

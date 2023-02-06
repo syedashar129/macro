@@ -17,12 +17,15 @@ export default function MacroDescription(){
 
     useEffect(() => {
         loadMacros()
+        console.log(macro)
     }, [])
 
     return (
 
         <div>
-            <button></button>
+            <a href={"/"}>
+                <button>Home</button>
+            </a>
             <h1>{macro.title}</h1>
             <h2>Description : {macro.description}</h2>
         </div>
