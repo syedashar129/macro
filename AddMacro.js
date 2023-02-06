@@ -109,6 +109,7 @@ export default function AddMacro(){
                     <div className={"search-inner"}>
                     <input
                         type={"text"}
+                        placeholder={"Search for macro item"}
                         value={search}
                         onChange={onSearchChange}
                     />
@@ -172,15 +173,17 @@ export default function AddMacro(){
                     <li>
                         {e.title}
 
-                        <Popup trigger={<button>show description</button>}>
-                            <div>
-                                {e.description}
-                            </div>
-                        </Popup>
-                        <button
-                            onClick={() => deleteItem(e.id)}>
+
+                            <Button href={`/description/${e.id}`} size={"full"} colorScheme={"primary"} variant={"solid"}>show description</Button>
+
+
+                        <Button
+                            onPress={() => deleteItem(e.id)}
+                            size={"full"}
+                            colorScheme={"secondary"}
+                            variant={"solid"}>
                             Delete
-                        </button>
+                        </Button>
                     </li>
                 </ul>
                 ))}
