@@ -2,23 +2,33 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import { Button } from '@rneui/themed';
-import { Input } from '@rneui/themed';
-import { ListItem } from '@rneui/themed';
+import {Button, useTheme, Input} from "native-base";
+import { NativeBaseProvider, extendTheme} from 'native-base';
 import {Divider} from "@rneui/base";
 import {useParams} from "react-router-dom";
 
 
 export default function AddMacro(){
+    const newColorTheme = {
+        brand: {
+            900: '#5B8DF6',
+            800: '#ffffff',
+            700: '#cccccc',
+        },
+    };
 
-
+    const theme = extendTheme({
+        colors: newColorTheme,
+    });
     //useState for posting
     const [macro, setMacro] = useState({
         title:"",
         description:""
     });
 
+    // done when id used in put and delete
     const {id} = useParams()
+
     //need to make the macro object before adding it (macro obj has a title description -- refer to spring obj)
     const {title, description} = macro;
 
@@ -61,10 +71,48 @@ export default function AddMacro(){
     // for react native elements lib
     const input = React.createRef();
 
-    return (
+    // state for search input
+    const [search, setSearch] = useState('');
 
+    //
+    const onSearchChange = (event) => {
+        setSearch(event.target.value);
+    }
+
+    return (
+        <NativeBaseProvider theme={theme}>
         <div>
             <h1>Macro Dictionary</h1>
+
+            <div>
+                <div>
+                    <input
+                        type={"text"}
+                        value={search}
+                        onChange={onSearchChange}
+                    />
+                    <button>Search</button>
+                </div>
+                <div>
+                    {Macro
+                        .filter((macroItem) => {
+                        const searchValue = search.toLowerCase();
+                        const title = macroItem.title.toLowerCase();
+
+                        return(
+                            title.startsWith(searchValue) && searchValue
+                        )
+                    })
+                        .map((e) => (
+                            <div>
+                                {e.title}
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+
+
             <form
             onSubmit={(e) => {onSubmit(e)}}>
             <input
@@ -107,6 +155,6 @@ export default function AddMacro(){
                 </ul>
                 ))}
         </div>
-
+        </NativeBaseProvider>
     )
 }
