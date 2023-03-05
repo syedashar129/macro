@@ -14,60 +14,10 @@ import {Card} from "react-native-elements";
 
 
 
-
-const HomeScreen = ({ navigation }) => {
-    return (
-        <View style={styles.container}>
-            <Header
-                placement="left"
-                leftComponent={
-                    <Icon
-                        name="menu"
-                        type="material"
-                        color="#fff"
-                        onPress={() => navigation.toggleDrawer()}
-                    />
-                }
-                centerComponent={{ text: 'Home', style: { color: '#fff' } }}
-            />
-            <Text>Welcome to the Home Screen!</Text>
-        </View>
-    );
-};
-
-const SecondScreen = ({ navigation }) => {
-    return (
-        <View style={styles.container}>
-            <Header
-                placement="left"
-                leftComponent={
-                    <Icon
-                        name="menu"
-                        type="material"
-                        color="#fff"
-                        onPress={() => navigation.toggleDrawer()}
-                    />
-                }
-                centerComponent={{ text: 'Second Screen', style: { color: '#fff' } }}
-                rightComponent={
-                    <Icon
-                        name="arrow-right"
-                        type="font-awesome"
-                        color="#fff"
-                        onPress={() => navigation.navigate('Home')}
-                    />
-                }
-            />
-            <Text>Welcome to the Second Screen!</Text>
-        </View>
-    );
-};
-
 // this is to get themes from hook
 export const ThemeContext = createContext(null);
 
 export default function App() {
-
    const [theme, setTheme] = useState("light");
 
    const toggle = () => {
@@ -99,7 +49,7 @@ export default function App() {
                           placement="center"
                           rightComponent={
                               <TouchableOpacity>
-                                  <Icon name="home" type="font-awesome" color="#fff" />
+                                  <Icon href={"/"} name="home" type="font-awesome" color="#fff" />
                               </TouchableOpacity>
 
                       }

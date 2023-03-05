@@ -160,26 +160,59 @@ export default function AddMacro(){
             <form
             onSubmit={(e) => {onSubmit(e)}}>
 
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <input
                 type={"text"}
                 placeholder={"Enter Title"}
                 name={"title"}
                 value={macro.title}
                 onChange={(e) => onInputChange(e)}
+                style={{
+                    padding: 10,
+                    borderRadius: 5,
+                    border: '2px solid #ccc',
+                    fontSize: 16,
+                    marginBottom: 10,
+                }}
             />
+                </div>
 
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <input
                 type={"text"}
                 placeholder={"Enter macro description"}
                 name={"description"}
                 value={macro.description}
                 onChange={(e) => onInputChange(e)}
+                style={{
+                    padding: 10,
+                    borderRadius: 5,
+                    border: '2px solid #ccc',
+                    fontSize: 16,
+                    marginBottom: 10,
+                }}
             />
+            </div>
+
+                <br/>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <button
                     type={"submit"}
+                    style={{
+                        backgroundColor: '#007bff',
+                        color: '#fff',
+                        padding: '10px 20px',
+                        border: 'none',
+                        borderRadius: 5,
+                        fontSize: 16,
+                        cursor: 'pointer',
+                    }}
                 >Submit</button>
+                </div>
+
             </form>
 
+            <br/>
             <Divider width={5}/>
 
 
@@ -195,7 +228,16 @@ export default function AddMacro(){
                         </Card.Content>
                         <Card.Actions>
                             <Button href={`/description/${e.id}`}>View More</Button>
-                        </Card.Actions>
+                        </Card.Actions><Card.Actions>
+                        <Button
+                                    onPress={() => deleteItem(e.id)}
+                                    size={"full"}
+                                    colorScheme={"secondary"}
+                                    variant={"solid"}>
+                                    Delete
+                                </Button>
+                    </Card.Actions>
+
                     </Card>
                 </div>
                 // <ul>
