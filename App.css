@@ -50,3 +50,14 @@
     from {opacity: 0;}
     to {opacity:1 ;}
 }
+
+#light{
+    background-color: white;;
+}
+#dark{
+    background-color: darkslategrey;
+}
+
+#dark .search{
+    background-color: white;
+}

@@ -6,8 +6,10 @@ import {Button, useTheme, Input} from "native-base";
 import { NativeBaseProvider, extendTheme} from 'native-base';
 import {Divider} from "@rneui/base";
 import {useParams} from "react-router-dom";
-import {set} from "@expo/cli/build/src/utils/obj";
+import { View, Text, StyleSheet } from 'react-native';
 import './Search.css';
+import {Card, Paragraph, Title} from "react-native-paper";
+import { SearchBar } from 'react-native-elements';
 
 
 export default function AddMacro(){
@@ -84,7 +86,7 @@ export default function AddMacro(){
     // search submit state
     const [submit, setSubmit] = useState('');
 
-    // function to save search
+    // function to save search -- not working
     const onSearchSubmit = () => {
         // if search = macro.title -- return macro.title
         Macro.map((e) => {
@@ -98,28 +100,40 @@ export default function AddMacro(){
         </div>
     }
 
+    const Styles = StyleSheet.create({
+        container : {
+            alignContent: 'center',
+            margin: 37
+        }})
+
+
 
     return (
         <NativeBaseProvider theme={theme}>
-        <div>
-            <h1>Macro Dictionary</h1>
 
+        <div>
             <div className={"App"}>
+
                 <div className={"search-container"}>
                     <div className={"search-inner"}>
-                    <input
-                        type={"text"}
-                        placeholder={"Search for macro item"}
-                        value={search}
-                        onChange={onSearchChange}
-                    />
+                        <div className={"search"}>
+                        <Input
+                            type={"text"}
+                            placeholder={"Search for macro item"}
+                            value={search}
+                            onChange={onSearchChange}
+                        />
+                        </div>
+
                     <button
                         onClick={onSearchSubmit}>
                         Search
                     </button>
-                    </div>
+                </div>
 
-                <div className={"dropdown"}>
+
+                <div className={""}>
+
                     <div className={"dropdown-row"}>
                     {Macro
                         .filter((macroItem) => {
@@ -168,26 +182,46 @@ export default function AddMacro(){
 
             <Divider width={5}/>
 
+
             {Macro.map((e, index) => (
-                <ul>
-                    <li>
-                        {e.title}
+                <div>
+                    <Card style={Styles.container}>
+                        <Card.Content>
+                            <Title>{e.title}</Title>
+                        </Card.Content>
 
+                        <Card.Content>
+                            <Paragraph>{e.description}</Paragraph>
+                        </Card.Content>
+                        <Card.Actions>
+                            <Button href={`/description/${e.id}`}>View More</Button>
+                        </Card.Actions>
+                    </Card>
+                </div>
+                // <ul>
+                //     <li>
+                //         {e.title}
+                //
+                //
+                //             <Button href={`/description/${e.id}`} size={"full"} colorScheme={"primary"} variant={"solid"}>show description</Button>
+                //
+                //
+                //         <Button
+                //             onPress={() => deleteItem(e.id)}
+                //             size={"full"}
+                //             colorScheme={"secondary"}
+                //             variant={"solid"}>
+                //             Delete
+                //         </Button>
+                //     </li>
+                // </ul>
 
-                            <Button href={`/description/${e.id}`} size={"full"} colorScheme={"primary"} variant={"solid"}>show description</Button>
-
-
-                        <Button
-                            onPress={() => deleteItem(e.id)}
-                            size={"full"}
-                            colorScheme={"secondary"}
-                            variant={"solid"}>
-                            Delete
-                        </Button>
-                    </li>
-                </ul>
                 ))}
+
         </div>
         </NativeBaseProvider>
     )
+
+
 }
+

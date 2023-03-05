@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useParams} from "react-router-dom";
+import theme from "./App"
 
 export default function MacroDescription(){
     const [macro, setMacro] = useState({
@@ -26,7 +27,7 @@ export default function MacroDescription(){
             <a href={"/"}>
                 <button>Home</button>
             </a>
-            <h1>{macro.title}</h1>
+            <h1>{macro.title.toUpperCase()}</h1>
             <h2>Description : {macro.description}</h2>
         </div>
     )
